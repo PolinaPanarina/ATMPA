@@ -1,10 +1,6 @@
 # Test Automation Framework (TAF) with Java, Selenium, JUnit 5
 
-This is a Test Automation Framework (TAF) developed using Java, Selenium, JUnit 5
-
-## Purpose
-
-Purpose of this project is to setup TAF from scratch.
+This is a Test Automation Framework (TAF) developed using Java, Selenium, JUnit 5, RestAssured
 
 ## Requirements
 
