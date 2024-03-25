@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.8.1'
 }
 
 group = 'com.epam'
@@ -8,12 +9,48 @@ version = '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+allure {
+    version = '2.14.0'
+}
 
+ext {
+    slf4jVersion = '2.0.7'
+    junitVersion = '5.10.0'
+    assertJVersion = '3.24.2'
+    lombokVersion = '1.18.24'
+    logbackVersion = '1.4.14'
+    seleniumVersion = '4.16.1'
+    seleniumDevTools = '4.18.1'
+    webDriverManager = '5.5.3'
+    allureVersion = '2.20.0'
+    aspectJVersion = '1.9.21'
+    restAssuredVersion = '4.4.0'
+}
+
+configurations {
+    agent {
+        canBeResolved = true
+        canBeConsumed = true
+    }
+}
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    agent "org.aspectj:aspectjweaver:$aspectJVersion"
+    implementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+            "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
+            "org.assertj:assertj-core:${assertJVersion}",
+            "org.projectlombok:lombok:${lombokVersion}",
+            "ch.qos.logback:logback-classic:${logbackVersion}",
+            "org.seleniumhq.selenium:selenium-java:${seleniumVersion}",
+            "org.seleniumhq.selenium:selenium-devtools-v122:${seleniumDevTools}",
+            "io.github.bonigarcia:webdrivermanager:${webDriverManager}",
+            "io.rest-assured:rest-assured:${restAssuredVersion}",
+            "io.qameta.allure:allure-junit5:$allureVersion"
+
 }
 
 test {
     useJUnitPlatform()
+    systemProperties System.getProperties()
+    ignoreFailures = true
+    jvmArgs = ["-javaagent:${configurations.agent.singleFile}"]
 }
