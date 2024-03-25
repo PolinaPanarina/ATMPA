@@ -31,7 +31,7 @@ jobs:
         uses: actions/setup-java@v4.2.1
         with: 
           java-version: '17'
-          distribution: 'Coretto'
+          distribution: 'zulu'
 
       # Build
       - name: Build with Gradle
