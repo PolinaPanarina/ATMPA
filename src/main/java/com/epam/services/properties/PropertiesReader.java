@@ -26,4 +26,11 @@ public class PropertiesReader {
         }
     }
 
+    public static String readSecret(String secretName) {
+        String secretValue = System.getenv(secretName);
+        if (secretValue == null) {
+            throw new RuntimeException("Secret '" + secretName + "' not found");
+        }
+        return secretValue;
+    }
 }

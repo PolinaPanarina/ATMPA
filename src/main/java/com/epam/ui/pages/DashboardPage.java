@@ -1,10 +1,11 @@
 package com.epam.ui.pages;
 
+import com.epam.services.properties.PropertiesReader;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class DashboardPage extends BasePage {
-    public static final String DASHBOARD_PAGE_URL = "https://reportportal.epam.com/ui/#{1}/dashboard";
+    public String DASHBOARD_PAGE_URL;
 
     @FindBy(xpath = "//span[text()='All Dashboards']")
     private WebElement allDashboardsTitle;
@@ -15,6 +16,6 @@ public class DashboardPage extends BasePage {
     }
 
     public DashboardPage() {
-        super();
+        this.DASHBOARD_PAGE_URL = PropertiesReader.getProperty(URL_PROPERTY_FILE_NAME, "dashboardPageUrl.regexp");
     }
 }

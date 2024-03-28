@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.epam.ui.pages.LoginPage.LOGIN_PAGE_URL;
-
 public class LoginPageSteps extends BaseSteps {
     private final LoginPage loginPage;
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginPageSteps.class);
@@ -20,7 +18,7 @@ public class LoginPageSteps extends BaseSteps {
     @Step
     public void openLoginPage() {
         LOGGER.info("openLoginPage");
-        loginPage.navigateTo(LOGIN_PAGE_URL);
+        loginPage.navigateTo(loginPage.LOGIN_PAGE_URL);
     }
 
     @Step

@@ -1,12 +1,13 @@
 package com.epam.ui.pages;
 
+import com.epam.services.properties.PropertiesReader;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 public class LoginPage extends BasePage {
-    public static final String LOGIN_PAGE_URL = "https://rp.epam.com/";
+    public String LOGIN_PAGE_URL;
     @FindBy(xpath = "//span[contains(., 'Welcome,login to your account')]")
     private List<WebElement> elementsWithWelcomeText;
     @FindBy(xpath = ".//button[text()='Login']")
@@ -36,7 +37,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage() {
-        super();
+        this.LOGIN_PAGE_URL = PropertiesReader.getProperty(URL_PROPERTY_FILE_NAME, "loginPageUrl");
     }
 
 

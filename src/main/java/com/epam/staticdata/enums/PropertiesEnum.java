@@ -1,8 +1,8 @@
 package com.epam.staticdata.enums;
 
 public enum PropertiesEnum {
-    USER_NAME_PROPERTY("username"),
-    PASSWORD_PROPERTY("password"),
+    USER_NAME_PROPERTY("testUsername"),
+    PASSWORD_PROPERTY("testPassword"),
     BROWSER("browser"),
     RP_API_BASE_PATH("reportPortalApiPath"),
     RP_LOGIN_API_PATH("reportPortalLoginPage"),

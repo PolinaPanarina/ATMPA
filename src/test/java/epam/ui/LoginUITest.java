@@ -14,7 +14,6 @@ import static com.epam.staticdata.enums.PropertiesEnum.USER_NAME_PROPERTY;
 public class LoginUITest extends BaseUiTest {
     public static LoginPageSteps loginPageSteps;
     public static DashboardPageSteps dashboardPageSteps;
-    public static final String PROPERTY_FILE_NAME = "user.properties";
 
     @BeforeAll()
     static void setUp() {
@@ -35,8 +34,8 @@ public class LoginUITest extends BaseUiTest {
     @Description("Verify that User can login to the RP")
     void verifyThatUserCanLoginToTheRP() {
         loginPageSteps.openLoginPage();
-        loginPageSteps.enterUserLogin(PropertiesReader.getProperty(PROPERTY_FILE_NAME, USER_NAME_PROPERTY.getValue()));
-        loginPageSteps.enterUserPassword(PropertiesReader.getProperty(PROPERTY_FILE_NAME, PASSWORD_PROPERTY.getValue()));
+        loginPageSteps.enterUserLogin(PropertiesReader.readSecret(USER_NAME_PROPERTY.getValue()));
+        loginPageSteps.enterUserPassword(PropertiesReader.readSecret(PASSWORD_PROPERTY.getValue()));
         loginPageSteps.clickOnLoginButton();
         dashboardPageSteps.verifyDashboardPageIsOpened();
     }

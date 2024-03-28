@@ -10,6 +10,7 @@ import static com.epam.staticdata.enums.PropertiesEnum.BROWSER;
 public class BasePage {
     public WebDriver driver;
     public static final String PROPERTY_FILE_NAME = "browser.properties";
+    public static final String URL_PROPERTY_FILE_NAME = "urls.properties";
 
     public BasePage() {
         this.driver = WebDriverFactory.getDriver(PropertiesReader.getProperty(PROPERTY_FILE_NAME, BROWSER.getValue()));
