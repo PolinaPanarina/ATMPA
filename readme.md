@@ -12,7 +12,7 @@ Integrate below components into framework (using correct layer):
 - Reporter
 - Test runner
 - Configuration
-- Utilities 
+- Utilities
 
 ## Technologies
 - Java 17
@@ -26,5 +26,5 @@ Integrate below components into framework (using correct layer):
 ## How to Run:
 - To build TAF without tests:
   ```./gradlew build --exclude-task test```
-- To build TAF with tests:
-```./gradlew build```
+  - To build TAF with tests:
+  ```./gradlew build```
