@@ -21,7 +21,6 @@ public class LoginPage extends BasePage {
         return loginButton;
     }
 
-
     public WebElement getLoginPlaceHolder() {
         return loginPlaceHolder;
     }

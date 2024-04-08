@@ -3,7 +3,6 @@ package com.epam.ui.steps;
 import com.epam.ui.pages.LoginPage;
 import io.qameta.allure.Step;
 import org.assertj.core.api.Assertions;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class Table {
-    private WebElement gridElement;
+    private final WebElement gridElement;
 
     public Table(WebElement webElement) {
         this.gridElement = webElement;

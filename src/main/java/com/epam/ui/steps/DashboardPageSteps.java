@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class DashboardPageSteps extends BaseSteps {
     private final DashboardPage dashboardPage;
-    private static Logger LOGGER = LoggerFactory.getLogger(DashboardPageSteps.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DashboardPageSteps.class);
 
     public DashboardPageSteps() {
         this.dashboardPage = new DashboardPage();

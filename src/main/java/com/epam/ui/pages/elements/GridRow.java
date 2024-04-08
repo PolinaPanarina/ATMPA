@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class GridRow {
-    private WebElement gridRow;
+    private final WebElement gridRow;
 
     public GridRow(WebElement webElement) {
         this.gridRow = webElement;
