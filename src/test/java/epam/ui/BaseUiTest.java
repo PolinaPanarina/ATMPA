@@ -2,19 +2,23 @@ package epam.ui;
 
 import com.epam.driversettings.WebDriverFactory;
 import com.epam.services.listener.TestListener;
-import org.junit.jupiter.api.AfterAll;
+import com.epam.services.listener.TestNGListener;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Listeners;
+
 @ExtendWith(TestListener.class)
+@Listeners(TestNGListener.class)
 public class BaseUiTest {
-    public static final Logger LOGGER = LoggerFactory.getLogger(BaseUiTest.class);
 
-
-    @AfterAll
-    public static void tearDown() {
-        LOGGER.info("tearDown");
+    @AfterEach
+    public void tearDown() {
         WebDriverFactory.quitDriver();
     }
 
+    @AfterMethod
+    public void tearDownTestNg() {
+        WebDriverFactory.quitDriver();
+    }
 }

@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="ParallelClassesRun" parallel="methods" thread-count="2">
+    <test name="ParallelClass">
+        <classes>
+            <class name="epam.ui.DashboardTest"/>
+            <class name="epam.ui.LoginUITest"/>
+        </classes>
+    </test>
+</suite>
