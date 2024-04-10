@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import static com.epam.staticdata.enums.PropertiesEnum.BROWSER;
 
 public class BasePage {
-    public WebDriver driver;
+    private final WebDriver driver;
     public static final String PROPERTY_FILE_NAME = "browser.properties";
     public static final String URL_PROPERTY_FILE_NAME = "urls.properties";
 
@@ -22,6 +22,6 @@ public class BasePage {
     }
 
     public WebDriver getDriver() {
-        return this.driver;
+        return driver;
     }
 }

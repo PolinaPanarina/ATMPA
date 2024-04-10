@@ -12,17 +12,14 @@ public class LoginPage extends BasePage {
     private List<WebElement> elementsWithWelcomeText;
     @FindBy(xpath = ".//button[text()='Login']")
     private WebElement loginButton;
-
     @FindBy(xpath = ".//input[@placeholder='Login']")
     private WebElement loginPlaceHolder;
-
     @FindBy(xpath = ".//input[@placeholder='Password']")
     private WebElement passwordPlaceHolder;
 
     public WebElement getLoginButton() {
         return loginButton;
     }
-
 
     public WebElement getLoginPlaceHolder() {
         return loginPlaceHolder;
@@ -39,6 +36,5 @@ public class LoginPage extends BasePage {
     public LoginPage() {
         this.LOGIN_PAGE_URL = PropertiesReader.getProperty(URL_PROPERTY_FILE_NAME, "loginPageUrl");
     }
-
 
 }

@@ -25,6 +25,7 @@ ext {
     allureVersion = '2.20.0'
     aspectJVersion = '1.9.21'
     restAssuredVersion = '4.4.0'
+    testNGVersion = '7.7.1'
 }
 
 configurations {
@@ -37,6 +38,7 @@ dependencies {
     agent "org.aspectj:aspectjweaver:$aspectJVersion"
     implementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
             "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
+            "org.junit.jupiter:junit-jupiter-params:${junitVersion}",
             "org.assertj:assertj-core:${assertJVersion}",
             "org.projectlombok:lombok:${lombokVersion}",
             "ch.qos.logback:logback-classic:${logbackVersion}",
@@ -44,7 +46,8 @@ dependencies {
             "org.seleniumhq.selenium:selenium-devtools-v122:${seleniumDevTools}",
             "io.github.bonigarcia:webdrivermanager:${webDriverManager}",
             "io.rest-assured:rest-assured:${restAssuredVersion}",
-            "io.qameta.allure:allure-junit5:$allureVersion"
+            "io.qameta.allure:allure-junit5:$allureVersion",
+            "org.testng:testng:$testNGVersion"
 
 }
 
@@ -53,4 +56,5 @@ test {
     systemProperties System.getProperties()
     ignoreFailures = true
     jvmArgs = ["-javaagent:${configurations.agent.singleFile}"]
+    maxParallelForks = 3
 }

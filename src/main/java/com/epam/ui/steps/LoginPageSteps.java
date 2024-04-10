@@ -24,12 +24,14 @@ public class LoginPageSteps extends BaseSteps {
     @Step
     public void enterUserLogin(String userLogin) {
         LOGGER.info("enterUserLogin: " + userLogin);
+        waitUntilElementIsDisplayed(loginPage.getDriver(), loginPage.getLoginPlaceHolder());
         loginPage.getLoginPlaceHolder().sendKeys(userLogin);
     }
 
     @Step("enterUserPassword: ")
     public void enterUserPassword(String userPassword) {
         LOGGER.info("enterUserPassword: " + userPassword);
+        waitUntilElementIsDisplayed(loginPage.getDriver(), loginPage.getPasswordPlaceHolder());
         loginPage.getPasswordPlaceHolder().sendKeys(userPassword);
     }
 
@@ -43,5 +45,6 @@ public class LoginPageSteps extends BaseSteps {
     public void verifyThatRPLoginPageIsOpened() {
         LOGGER.info("verifyThatRPLoginPageIsOpened");
         Assertions.assertThat(loginPage.getElementsWithWelcomeText()).allSatisfy(WebElement::isDisplayed);
+        Assertions.assertThat(loginPage.getLoginButton().isDisplayed()).isTrue();
     }
 }

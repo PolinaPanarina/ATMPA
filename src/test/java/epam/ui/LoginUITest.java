@@ -1,42 +1,54 @@
 package epam.ui;
 
-import com.epam.services.properties.PropertiesReader;
+import com.epam.testData.DashboardDataProvider;
 import com.epam.ui.steps.DashboardPageSteps;
 import com.epam.ui.steps.LoginPageSteps;
 import io.qameta.allure.Description;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import static com.epam.staticdata.enums.PropertiesEnum.PASSWORD_PROPERTY;
-import static com.epam.staticdata.enums.PropertiesEnum.USER_NAME_PROPERTY;
-
+@Execution(ExecutionMode.CONCURRENT)
 public class LoginUITest extends BaseUiTest {
-    public static LoginPageSteps loginPageSteps;
-    public static DashboardPageSteps dashboardPageSteps;
+    private LoginPageSteps loginPageSteps;
+    private DashboardPageSteps dashboardPageSteps;
 
-    @BeforeAll()
-    static void setUp() {
+    @BeforeEach()
+    void setUp() {
         loginPageSteps = new LoginPageSteps();
         dashboardPageSteps = new DashboardPageSteps();
     }
 
-    @Test
-    @DisplayName("Open Login Page test")
-    @Description("Verify that RP Login Page is opened")
-    void verifyThatRPLoginPageIsOpened() {
-        loginPageSteps.openLoginPage();
-        loginPageSteps.verifyThatRPLoginPageIsOpened();
+    @BeforeMethod()
+    void setUpTestNg() {
+        loginPageSteps = new LoginPageSteps();
+        dashboardPageSteps = new DashboardPageSteps();
     }
 
+    @ParameterizedTest()
     @Test
     @DisplayName("Login with credentials test")
     @Description("Verify that User can login to the RP")
-    void verifyThatUserCanLoginToTheRP() {
+    @MethodSource("com.epam.testData.DashboardDataProvider#loginData")
+    void verifyThatUserCanLoginToTheRP(String userName, String password) {
         loginPageSteps.openLoginPage();
-        loginPageSteps.enterUserLogin(PropertiesReader.readSecret(USER_NAME_PROPERTY.getValue()));
-        loginPageSteps.enterUserPassword(PropertiesReader.readSecret(PASSWORD_PROPERTY.getValue()));
+        loginPageSteps.enterUserLogin(userName);
+        loginPageSteps.enterUserPassword(password);
         loginPageSteps.clickOnLoginButton();
         dashboardPageSteps.verifyDashboardPageIsOpened();
+    }
+
+    @Test(dataProvider = "invalidLoginData", dataProviderClass = DashboardDataProvider.class)
+    public void verifyLoginIsImpossibleWhenCredentialsAreIncorrect(String userName, String password) {
+        loginPageSteps.openLoginPage();
+        loginPageSteps.enterUserLogin(userName);
+        loginPageSteps.enterUserPassword(password);
+        loginPageSteps.clickOnLoginButton();
+        loginPageSteps.verifyThatRPLoginPageIsOpened();
     }
 }

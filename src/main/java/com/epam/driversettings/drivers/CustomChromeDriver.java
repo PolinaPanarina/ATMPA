@@ -1,6 +1,7 @@
 package com.epam.driversettings.drivers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,7 +21,7 @@ public class CustomChromeDriver {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         options.addArguments("--disable-notifications");
-
+        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         LOGGER.info(String.format("Setting up Chrome options: %s", options));
         return options;
     }
