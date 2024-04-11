@@ -24,6 +24,8 @@ Integrate below components into framework (using correct layer):
 - gradle
 - TestNg
 
+- Cucumber
+
 ## How to Run:
 - To build TAF without tests:
   ```./gradlew build --exclude-task test```
