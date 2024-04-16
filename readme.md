@@ -23,7 +23,6 @@ Integrate below components into framework (using correct layer):
 - RestAssured
 - gradle
 - TestNg
-
 - Cucumber
 
 ## How to Run:
