@@ -1,12 +1,10 @@
 package epam.stepdefinitions;
 
-import com.epam.driversettings.WebDriverFactory;
 import com.epam.services.properties.PropertiesReader;
 import com.epam.staticdata.enums.PropertiesEnum;
 import com.epam.ui.steps.DashboardPageSteps;
 import com.epam.ui.steps.LoginPageSteps;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.After;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -57,8 +55,4 @@ public class LoginStepsDefinitions {
         loginPageSteps.verifyThatRPLoginPageIsOpened();
     }
 
-    @After
-    public void closeBrowser() {
-        WebDriverFactory.quitDriver();
-    }
 }

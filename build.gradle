@@ -51,7 +51,6 @@ dependencies {
             "org.testng:testng:$testNGVersion",
             "io.cucumber:cucumber-java:$cucumberVersion",
             "io.cucumber:cucumber-junit:$cucumberVersion"
-
 }
 
 test {
