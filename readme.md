@@ -22,6 +22,8 @@ Integrate below components into framework (using correct layer):
 - Allure
 - RestAssured
 - gradle
+- TestNg
+- Cucumber
 
 ## How to Run:
 - To build TAF without tests:

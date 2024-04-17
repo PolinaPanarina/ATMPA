@@ -26,6 +26,7 @@ ext {
     aspectJVersion = '1.9.21'
     restAssuredVersion = '4.4.0'
     testNGVersion = '7.7.1'
+    cucumberVersion = '7.16.1'
 }
 
 configurations {
@@ -47,8 +48,9 @@ dependencies {
             "io.github.bonigarcia:webdrivermanager:${webDriverManager}",
             "io.rest-assured:rest-assured:${restAssuredVersion}",
             "io.qameta.allure:allure-junit5:$allureVersion",
-            "org.testng:testng:$testNGVersion"
-
+            "org.testng:testng:$testNGVersion",
+            "io.cucumber:cucumber-java:$cucumberVersion",
+            "io.cucumber:cucumber-junit:$cucumberVersion"
 }
 
 test {

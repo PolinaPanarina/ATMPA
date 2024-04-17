@@ -28,23 +28,23 @@ public class DashboardDataProvider {
     @org.testng.annotations.DataProvider(name = "dashboardData")
     public static Object[][] dashboardData() {
         return new Object[][]{
-                { new DashboardData(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName1"),
-                        PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardOwner1")) },
-                { new DashboardData(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName2"),
-                        PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardOwner2")) },
-                { new DashboardData(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName3"),
-                        PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardOwner2")) }
+                {new DashboardData(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName1"),
+                        PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardOwner1"))},
+                {new DashboardData(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName2"),
+                        PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardOwner2"))},
+                {new DashboardData(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName3"),
+                        PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardOwner2"))}
         };
     }
 
     @org.testng.annotations.DataProvider(name = "incorrectDashboardData")
     public static Object[][] incorrectDashboardData() {
         return new Object[][]{
-                { new DashboardData("1", "polina") },
-                { new DashboardData("5", "polina_test1238955444") },
-                { new DashboardData("3", "po") },
-                { new DashboardData("5", "23") },
-                { new DashboardData("8", "test") },
+                {new DashboardData("1", "polina")},
+                {new DashboardData("5", "polina_test1238955444")},
+                {new DashboardData("3", "po")},
+                {new DashboardData("5", "23")},
+                {new DashboardData("8", "test")},
         };
     }
 }
