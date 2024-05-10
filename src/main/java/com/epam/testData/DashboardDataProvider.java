@@ -1,6 +1,6 @@
 package com.epam.testData;
 
-import com.epam.dashboard.DashboardData;
+import com.epam.api.dto.dashboard.DashboardDataDto;
 import com.epam.services.properties.PropertiesReader;
 
 import static com.epam.staticdata.enums.PropertiesEnum.PASSWORD_PROPERTY;
@@ -28,11 +28,11 @@ public class DashboardDataProvider {
     @org.testng.annotations.DataProvider(name = "dashboardData")
     public static Object[][] dashboardData() {
         return new Object[][]{
-                {new DashboardData(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName1"),
+                {new DashboardDataDto(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName1"),
                         PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardOwner1"))},
-                {new DashboardData(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName2"),
+                {new DashboardDataDto(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName2"),
                         PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardOwner2"))},
-                {new DashboardData(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName3"),
+                {new DashboardDataDto(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName3"),
                         PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardOwner2"))}
         };
     }
@@ -40,11 +40,11 @@ public class DashboardDataProvider {
     @org.testng.annotations.DataProvider(name = "incorrectDashboardData")
     public static Object[][] incorrectDashboardData() {
         return new Object[][]{
-                {new DashboardData("1", "polina")},
-                {new DashboardData("5", "polina_test1238955444")},
-                {new DashboardData("3", "po")},
-                {new DashboardData("5", "23")},
-                {new DashboardData("8", "test")},
+                {new DashboardDataDto("1", "polina")},
+                {new DashboardDataDto("5", "polina_test1238955444")},
+                {new DashboardDataDto("3", "po")},
+                {new DashboardDataDto("5", "23")},
+                {new DashboardDataDto("8", "test")},
         };
     }
 }

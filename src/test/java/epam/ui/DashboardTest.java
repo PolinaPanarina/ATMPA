@@ -1,6 +1,6 @@
 package epam.ui;
 
-import com.epam.dashboard.DashboardData;
+import com.epam.api.dto.dashboard.DashboardDataDto;
 import com.epam.services.properties.PropertiesReader;
 import com.epam.testData.DashboardDataProvider;
 import com.epam.ui.steps.DashboardPageSteps;
@@ -35,7 +35,7 @@ public class DashboardTest extends BaseUiTest {
     @Test(dataProvider = "dashboardData", dataProviderClass = DashboardDataProvider.class)
     @ParameterizedTest
     @MethodSource("com.epam.testData.DashboardDataProvider#dashboardData")
-    public void verifyDashboardData(DashboardData dashboardData) {
+    public void verifyDashboardData(DashboardDataDto dashboardData) {
         loginPageSteps.openLoginPage();
         loginPageSteps.enterUserLogin(PropertiesReader.readSecret(USER_NAME_PROPERTY.getValue()));
         loginPageSteps.enterUserPassword( PropertiesReader.readSecret(PASSWORD_PROPERTY.getValue()));
@@ -48,7 +48,7 @@ public class DashboardTest extends BaseUiTest {
 
     @ParameterizedTest
     @MethodSource("com.epam.testData.DashboardDataProvider#dashboardData")
-    public void verifySpecifiedDashboardData(DashboardData dashboardData) {
+    public void verifySpecifiedDashboardData(DashboardDataDto dashboardData) {
         loginPageSteps.openLoginPage();
         loginPageSteps.enterUserLogin(PropertiesReader.readSecret(USER_NAME_PROPERTY.getValue()));
         loginPageSteps.enterUserPassword( PropertiesReader.readSecret(PASSWORD_PROPERTY.getValue()));

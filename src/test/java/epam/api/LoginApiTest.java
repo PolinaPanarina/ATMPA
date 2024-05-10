@@ -1,11 +1,10 @@
 package epam.api;
 
 import com.epam.api.steps.LoginPageApiSteps;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class LoginApiTest extends BaseApiTest {
+
     public static LoginPageApiSteps loginPAgeApiSteps;
 
     @BeforeAll

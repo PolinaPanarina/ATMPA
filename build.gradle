@@ -27,6 +27,7 @@ ext {
     restAssuredVersion = '4.4.0'
     testNGVersion = '7.7.1'
     cucumberVersion = '7.16.1'
+    httpClientVersion = '4.5.8'
 }
 
 configurations {
@@ -50,7 +51,8 @@ dependencies {
             "io.qameta.allure:allure-junit5:$allureVersion",
             "org.testng:testng:$testNGVersion",
             "io.cucumber:cucumber-java:$cucumberVersion",
-            "io.cucumber:cucumber-junit:$cucumberVersion"
+            "io.cucumber:cucumber-junit:$cucumberVersion",
+            "org.apache.httpcomponents:httpclient:$httpClientVersion"
 }
 
 test {

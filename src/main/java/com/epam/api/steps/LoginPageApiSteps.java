@@ -14,10 +14,9 @@ public class LoginPageApiSteps extends BaseApiSteps {
     @Step
     public void verifyStatusCodeOfTheLoginPageOpening() {
         LOGGER.info("Step: verifyStatusCodeOfTheLoginPageOpening");
-        Response response = sendGetResponse(RequestSpec.buildSimpleLoginSpecification());
+        Response response = sendGetRequest(RequestSpec.buildSimpleLoginSpecification());
 
         responseValidationApiSteps = new ResponseValidationApiSteps();
         responseValidationApiSteps.validateResponseCode(response, HttpStatus.SC_OK);
     }
-
 }
