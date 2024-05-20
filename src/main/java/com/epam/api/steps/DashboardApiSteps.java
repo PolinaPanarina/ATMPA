@@ -5,7 +5,6 @@ import com.epam.api.config.RequestConverter;
 import com.epam.api.dto.dashboard.CreateDashboardDto;
 import com.epam.api.dto.dashboard.DashboardIdDto;
 import io.qameta.allure.Step;
-import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;

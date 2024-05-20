@@ -1,7 +1,5 @@
 package com.epam.api.restassured;
 
-import com.epam.api.dto.dashboard.DashboardIdDto;
-import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 

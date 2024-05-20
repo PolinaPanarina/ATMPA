@@ -2,11 +2,9 @@ package com.epam.api.steps;
 
 import com.epam.api.config.CustomResponse;
 import com.epam.api.config.RequestConverter;
-import com.epam.api.restassured.RequestSpec;
 import com.epam.api.restassured.RestAssuredRequestConverter;
 import com.epam.services.properties.PropertiesReader;
 import io.qameta.allure.Step;
-import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

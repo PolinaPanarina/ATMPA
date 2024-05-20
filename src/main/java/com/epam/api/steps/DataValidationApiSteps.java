@@ -1,6 +1,5 @@
 package com.epam.api.steps;
 
-import com.epam.api.dto.dashboard.DashboardDataDto;
 import com.epam.api.dto.dashboard.GetDashboardByIdResponseDto;
 import io.qameta.allure.Step;
 
