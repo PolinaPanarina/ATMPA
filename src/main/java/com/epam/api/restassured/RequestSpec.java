@@ -1,4 +1,4 @@
-package com.epam.api.config;
+package com.epam.api.restassured;
 
 import com.epam.services.properties.PropertiesReader;
 import io.restassured.builder.RequestSpecBuilder;
@@ -6,7 +6,7 @@ import io.restassured.specification.RequestSpecification;
 
 import java.util.Map;
 
-import static com.epam.staticdata.enums.PropertiesEnum.*;
+import static com.epam.staticdata.enums.PropertiesEnum.TOKEN_PROPERTY;
 
 public class RequestSpec {
     public static final String API_PROPERTIES_FILE_NAME = "api.properties";
@@ -17,14 +17,6 @@ public class RequestSpec {
 
     private RequestSpec() {
         throw new IllegalStateException("Utility class");
-    }
-
-    public static RequestSpecification buildSimpleLoginSpecification() {
-        return new RequestSpecBuilder()
-                .setBaseUri(String.format(PropertiesReader.getProperty(API_PROPERTIES_FILE_NAME,
-                        RP_LOGIN_API_PATH.getValue()), "/dashboard"))
-                .setContentType("application/json")
-                .build().log().all();
     }
 
     public static RequestSpecification buildWithUrl(String url) {
@@ -44,17 +36,17 @@ public class RequestSpec {
                 .build().log().all();
     }
 
-    public static RequestSpecification buildWithDasboardId(String url, int id) {
+    public static RequestSpecification buildWithDasboardId(String url) {
         return new RequestSpecBuilder()
-                .setBaseUri(url + "/" + id)
+                .setBaseUri(url)
                 .addHeaders(AUTH_MAP)
                 .setContentType("application/json")
                 .build().log().all();
     }
 
-    public static RequestSpecification buildWithBodyAndDasboardId(String url, int id, Object obj) {
+    public static RequestSpecification buildWithBodyAndDasboardId(String url, Object obj) {
         return new RequestSpecBuilder()
-                .setBaseUri(url + "/" + id)
+                .setBaseUri(url)
                 .addHeaders(AUTH_MAP)
                 .setBody(obj)
                 .setContentType("application/json")

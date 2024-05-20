@@ -1,14 +1,14 @@
-package com.epam.api.steps;
+package com.epam.api.restassured;
 
+import com.epam.api.dto.dashboard.DashboardIdDto;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
 
-public class BaseApiSteps {
+public class BaseRequests {
 
-    @Step
     public Response sendGetRequest(RequestSpecification requestSpecification) {
         return given()
                 .spec(requestSpecification)
@@ -16,7 +16,6 @@ public class BaseApiSteps {
                 .then().log().status().extract().response();
     }
 
-    @Step
     public Response sendPostRequest(RequestSpecification requestSpecification) {
         return given()
                 .spec(requestSpecification)
@@ -24,7 +23,6 @@ public class BaseApiSteps {
                 .then().log().status().extract().response();
     }
 
-    @Step
     public Response sendDeleteRequest(RequestSpecification requestSpecification) {
         return given()
                 .spec(requestSpecification)
@@ -32,7 +30,6 @@ public class BaseApiSteps {
                 .then().log().status().extract().response();
     }
 
-    @Step
     public Response sendPutRequest(RequestSpecification requestSpecification) {
         return given()
                 .spec(requestSpecification)

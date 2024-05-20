@@ -1,44 +1,47 @@
 package com.epam.api.steps;
 
-import com.epam.api.config.RequestSpec;
+import com.epam.api.config.CustomResponse;
+import com.epam.api.config.RequestConverter;
 import com.epam.api.dto.dashboard.CreateDashboardDto;
 import com.epam.api.dto.dashboard.DashboardIdDto;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DashboardApiSteps extends BaseApiSteps {
+import static com.epam.api.config.UnifiedRequests.*;
+import static com.epam.api.dto.dashboard.transform.TransformToDto.transformToDashboardIdDto;
+
+public class DashboardApiSteps {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DashboardApiSteps.class);
-    public ResponseValidationApiSteps responseValidationApiSteps;
-    public DataValidationApiSteps dataValidationApiSteps;
-    public Response setupResponse;
     public String dashboardName;
     public DashboardIdDto dashboardId;
     public CreateDashboardDto createDashboard;
 
-
-    public void setupData(String url) {
+    @Step
+    public void setupData(String url, RequestConverter requestConverter) {
         LOGGER.info("Step: setupData");
-
         createDashboard = new CreateDashboardDto("none", generateDashboardName());
-        setupResponse = sendPostRequest(RequestSpec.buildWithBody(url, createDashboard));
+        CustomResponse setupResponse = sendPost(requestConverter, url, createDashboard);
 
         ResponseValidationApiSteps responseValidationApiSteps = new ResponseValidationApiSteps();
-        responseValidationApiSteps.validateResponseCode(setupResponse, HttpStatus.SC_CREATED);
+        responseValidationApiSteps.validateResponseCode(setupResponse.getStatusCode(), HttpStatus.SC_CREATED);
 
-        dashboardId = setupResponse.getBody().as(DashboardIdDto.class);
+        dashboardId = transformToDashboardIdDto(setupResponse.getResponseBody());
     }
 
-    public void deleteData(String url, int dashboardId) {
+    @Step
+    public void deleteData(String url, RequestConverter requestConverter) {
         LOGGER.info("Step: deleteCreatedData");
-        Response response = sendGetRequest(RequestSpec.buildWithDasboardId(url, dashboardId));
-        if (response.statusCode() == HttpStatus.SC_OK) {
-            setupResponse = sendDeleteRequest(RequestSpec.buildWithDasboardId(url, dashboardId));
+        CustomResponse setupResponse = sendGet(requestConverter, url);
+
+        if (setupResponse.getStatusCode() == HttpStatus.SC_OK) {
+            CustomResponse deleteResponse = sendDelete(requestConverter, url);
             ResponseValidationApiSteps responseValidationApiSteps = new ResponseValidationApiSteps();
-            responseValidationApiSteps.validateResponseCode(setupResponse, HttpStatus.SC_OK);
+            responseValidationApiSteps.validateResponseCode(deleteResponse.getStatusCode(), HttpStatus.SC_OK);
         }
     }
 
