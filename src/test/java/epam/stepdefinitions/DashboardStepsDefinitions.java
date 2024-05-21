@@ -1,6 +1,6 @@
 package epam.stepdefinitions;
 
-import com.epam.dashboard.DashboardData;
+import com.epam.api.dto.dashboard.DashboardDataDto;
 import com.epam.services.properties.PropertiesReader;
 import com.epam.staticdata.enums.PropertiesEnum;
 import com.epam.ui.steps.DashboardPageSteps;
@@ -42,7 +42,7 @@ public class DashboardStepsDefinitions {
 
     @Then("I should see that dashboard data is present {string} and {string}")
     public void verifyThatDashboardDataIsPresent(String dashboardName, String dashboardOwner) {
-        DashboardData dashboardData = new DashboardData(PropertiesReader.getProperty(DASHBOARD_DATA_PROPERTY_FILE_NAME,
+        DashboardDataDto dashboardData = new DashboardDataDto(PropertiesReader.getProperty(DASHBOARD_DATA_PROPERTY_FILE_NAME,
                 dashboardName), PropertiesReader.getProperty(DASHBOARD_DATA_PROPERTY_FILE_NAME, dashboardOwner));
         dashboardPageSteps.verifyDashboardIsPresent(dashboardData);
     }
@@ -55,7 +55,7 @@ public class DashboardStepsDefinitions {
 
     @Then("I should see that dashboard data is present in first lines {string} and {string}")
     public void verifyDashboardDataIsDisplayedInFirstLines(String dashboardName, String dashboardOwner) {
-        DashboardData dashboardData = new DashboardData(PropertiesReader.getProperty(DASHBOARD_DATA_PROPERTY_FILE_NAME,
+        DashboardDataDto dashboardData = new DashboardDataDto(PropertiesReader.getProperty(DASHBOARD_DATA_PROPERTY_FILE_NAME,
                 dashboardName), PropertiesReader.getProperty(DASHBOARD_DATA_PROPERTY_FILE_NAME, dashboardOwner));
         dashboardPageSteps.verifyFirstSearchedDashboardData(dashboardData);
     }

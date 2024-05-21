@@ -1,6 +1,6 @@
-package com.epam.dashboard;
+package com.epam.api.dto.dashboard;
 
-public class DashboardData {
+public class DashboardDataDto {
     private final String dashboardName;
     private final String owner;
 
@@ -12,7 +12,7 @@ public class DashboardData {
         return owner;
     }
 
-    public DashboardData(String dashboardName, String owner) {
+    public DashboardDataDto(String dashboardName, String owner) {
         this.dashboardName = dashboardName;
         this.owner = owner;
     }

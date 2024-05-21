@@ -1,6 +1,6 @@
 package com.epam.ui.steps;
 
-import com.epam.dashboard.DashboardData;
+import com.epam.api.dto.dashboard.DashboardDataDto;
 import com.epam.ui.pages.DashboardPage;
 import io.qameta.allure.Step;
 import org.assertj.core.api.Assertions;
@@ -27,7 +27,7 @@ public class DashboardPageSteps extends BaseSteps {
     }
 
     @Step
-    public void verifyDashboardIsPresent(DashboardData dashboardData) {
+    public void verifyDashboardIsPresent(DashboardDataDto dashboardData) {
         LOGGER.info("verifyDashboardIsPresent");
         try {
             Thread.sleep(1000);
@@ -41,7 +41,7 @@ public class DashboardPageSteps extends BaseSteps {
     }
 
     @Step
-    public void verifyFirstSearchedDashboardData(DashboardData dashboardData) {
+    public void verifyFirstSearchedDashboardData(DashboardDataDto dashboardData) {
         LOGGER.info("verifyFirstSearchedDashboardData");
         waitUntilElementIsDisplayed(dashboardPage.getDriver(), dashboardPage.getDashboardTable().getRows().getDashboardNames().get(0));
         Assertions.assertThat(getDashboardNameByIndex(0).getText()).isEqualTo(dashboardData.getDashboardName());
