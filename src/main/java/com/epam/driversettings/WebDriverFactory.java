@@ -15,14 +15,11 @@ public class WebDriverFactory {
 
     private static WebDriver initializeDriver(String browserType) {
         LOGGER.info("initializeDriver");
-        switch (browserType) {
-            case CHROME:
-                return new CustomChromeDriver().getDriver();
-            case FIREFOX:
-                return new CustomFirefoxDriver().getDriver();
-            default:
-                throw new IllegalArgumentException("Unsupported browser provided: " + browserType);
-        }
+        return switch (browserType) {
+            case CHROME -> new CustomChromeDriver().getDriver();
+            case FIREFOX -> new CustomFirefoxDriver().getDriver();
+            default -> throw new IllegalArgumentException("Unsupported browser provided: " + browserType);
+        };
 
     }
 
