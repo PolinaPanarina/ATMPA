@@ -3,7 +3,7 @@ package epam.ui;
 import com.epam.api.dto.dashboard.DashboardDataDto;
 import com.epam.services.properties.PropertiesReader;
 import com.epam.testData.DashboardDataProvider;
-import com.epam.ui.steps.DashboardPageSteps;
+import com.epam.ui.steps.AllDashboardsPageSteps;
 import com.epam.ui.steps.LoginPageSteps;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.parallel.Execution;
@@ -15,21 +15,21 @@ import org.testng.annotations.Test;
 
 import static com.epam.staticdata.enums.PropertiesEnum.*;
 @Execution(ExecutionMode.CONCURRENT)
-public class DashboardTest extends BaseUiTest {
-    private DashboardPageSteps dashboardPageSteps;
+public class AllDashboardsTests extends BaseUiTest {
+    private AllDashboardsPageSteps dashboardPageSteps;
     private LoginPageSteps loginPageSteps;
     public static final String URL_PROPERTY_FILE_NAME = "urls.properties";
 
     @BeforeMethod()
     void setUpTestNg() {
         loginPageSteps = new LoginPageSteps();
-        dashboardPageSteps = new DashboardPageSteps();
+        dashboardPageSteps = new AllDashboardsPageSteps();
     }
 
     @BeforeEach()
     void setUpJUnit() {
         loginPageSteps = new LoginPageSteps();
-        dashboardPageSteps = new DashboardPageSteps();
+        dashboardPageSteps = new AllDashboardsPageSteps();
     }
 
     @Test(dataProvider = "dashboardData", dataProviderClass = DashboardDataProvider.class)

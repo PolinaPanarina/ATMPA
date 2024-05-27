@@ -47,4 +47,11 @@ public class DashboardDataProvider {
                 {new DashboardDataDto("8", "test")},
         };
     }
+
+    public static Object[][] demoData() {
+        return new Object[][]{
+                {new DashboardDataDto(PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardName1"),
+                        PropertiesReader.getProperty(PROPERTY_FILE_NAME, "dashboardOwner1"))}
+        };
+    }
 }

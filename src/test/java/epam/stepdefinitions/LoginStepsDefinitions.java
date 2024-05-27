@@ -2,7 +2,7 @@ package epam.stepdefinitions;
 
 import com.epam.services.properties.PropertiesReader;
 import com.epam.staticdata.enums.PropertiesEnum;
-import com.epam.ui.steps.DashboardPageSteps;
+import com.epam.ui.steps.AllDashboardsPageSteps;
 import com.epam.ui.steps.LoginPageSteps;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.DataTableType;
@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class LoginStepsDefinitions {
     private final LoginPageSteps loginPageSteps = new LoginPageSteps();
-    private final DashboardPageSteps dashboardPageSteps = new DashboardPageSteps();
+    private final AllDashboardsPageSteps dashboardPageSteps = new AllDashboardsPageSteps();
 
     @DataTableType
     public PropertiesEnum propertiesDataType(String propertyTypeName) {

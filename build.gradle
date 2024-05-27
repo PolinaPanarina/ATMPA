@@ -21,7 +21,7 @@ ext {
     logbackVersion = '1.4.14'
     seleniumVersion = '4.16.1'
     seleniumDevTools = '4.18.1'
-    webDriverManager = '5.5.3'
+    webDriverManager = '5.8.0'
     allureVersion = '2.20.0'
     aspectJVersion = '1.9.21'
     restAssuredVersion = '4.4.0'
