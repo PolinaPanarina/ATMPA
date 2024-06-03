@@ -1,0 +1,38 @@
+name: Daily Build and Test
+
+on:
+  schedule:
+   # - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
+    - cron:  '30 17 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Setup JDK
+      - name: Set up JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Run API tests
+        run: ./gradlew test --tests epam.api.*
+      - name: Run UI tests
+        run: ./gradlew test --tests epam.ui.*
+      - name: Publish Test Results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Reports
+          path: build/reports/tests/
