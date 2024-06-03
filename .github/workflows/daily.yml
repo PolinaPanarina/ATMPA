@@ -2,7 +2,7 @@ name: Daily Build and Test
 
 on:
   schedule:
-    - cron:  '00 15 * * *'
+    - cron:  '15 15 * * *'
 
 jobs:
   build:
