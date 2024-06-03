@@ -64,10 +64,3 @@ test {
     maxParallelForks = 3
 }
 
-    sonarqube {
-        properties {
-            property 'sonar.host.url', 'https://sonarcloud.io'
-            property 'sonar.organization', 'polinapanarina'
-            property 'sonar.projectKey', 'PolinaPanarina_ATMPA'
-         }
-    }
