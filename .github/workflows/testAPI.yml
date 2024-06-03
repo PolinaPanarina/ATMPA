@@ -42,6 +42,14 @@ jobs:
         env:
           token: ${{ secrets.token }}
 
+      - name: Generate Allure Report
+        run: ./gradlew allureReport
+      - name: Archive Allure Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: Allure Report
+          path: build/reports/allure-report/
+
       - name: Publish Test Results
         if: always()
         uses: actions/upload-artifact@v2
