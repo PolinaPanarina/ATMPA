@@ -39,6 +39,9 @@ jobs:
 
       - name: Run UI tests
         run: ./gradlew test --tests epam.ui.*
+        env:
+          testUsername: ${{ secrets.TEST_USER_NAME }}
+          testPassword: ${{ secrets.TEST_USER_PASSWORD }}
 
       - name: Publish Test Results
         if: always()
