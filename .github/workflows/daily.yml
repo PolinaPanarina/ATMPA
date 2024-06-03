@@ -3,7 +3,7 @@ name: Daily Build and Test
 on:
   schedule:
    # - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
-    - cron:  '51 17 * * *'
+    - cron:  '55 14 * * *'
 
 jobs:
   build:
