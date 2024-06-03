@@ -36,10 +36,12 @@ jobs:
       # Build
       - name: Build with Gradle
         run: ./gradlew build --no-daemon
-      
+     
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2.2.0
-            
+        uses: SonarSource/sonarcloud-github-action@v2.2.0 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/sonarcloud-scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}       
+      
       - name: Run API tests
         run: ./gradlew test --tests epam.api.*
         env:
