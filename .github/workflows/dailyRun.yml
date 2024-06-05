@@ -1,0 +1,163 @@
+name: Daily Tests Run
+
+on:
+  schedule:
+    # - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
+    - cron: '15 15 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+      # Build
+      - name: Build with Gradle
+        run: ./gradlew build --exclude-task test
+
+      - name: Build notification
+        uses: FreEZer00/teams-webhook-action@v1.4.1
+        with:
+          webhook_url: ${{ secrets.DAILY_RUN_WEBHOOK }}
+          title: 'Build is finished'
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
+          additional_button_title: |-
+            Link to all runs
+          additional_button_url: |-
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/daily.yml
+
+  apiTests:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+
+      # Start Test Run Notification
+      - name: Start Test Run Notification
+        uses: FreEZer00/teams-webhook-action@v1.4.1
+        with:
+          webhook_url: ${{ secrets.DAILY_RUN_WEBHOOK }}
+          title: 'API tests run started'
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
+          additional_button_title: |-
+            Link to all runs
+          additional_button_url: |-
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/daily.yml
+
+      #   - name: SonarQube Scan
+      #     uses: sonarsource/sonarqube-scan-action@master
+      #     env:
+      #       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # # Check the Quality Gate status.
+      #   - name: SonarQube Quality Gate check
+      #     id: sonarqube-quality-gate-check
+      #     uses: sonarsource/sonarqube-quality-gate-action@master
+      #   # Force to fail step after specific time.
+      #     timeout-minutes: 5
+      #     env:
+      #      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # # Optionally you can use the output from the Quality Gate in another step.
+      # # The possible outputs of the `quality-gate-status` variable are `PASSED`, `WARN` or `FAILED`.
+      #   - name: "Example show SonarQube Quality Gate Status value"
+      #     run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
+
+
+      - name: Run API tests
+        run: ./gradlew test --tests epam.api.* -Drp.endpoint=https://reportportal.epam.com -Drp.api.key=$RP_TOKEN -Drp.launch=Daily_Test_Run_API -Drp.project=polina_panarina_personal_1 -Drp.enable=true
+        env:
+          token: ${{ secrets.token }}
+          RP_TOKEN: ${{ secrets.RP_TOKEN }}
+
+      - name: Publish Test Results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Reports
+          path: build/reports/tests/
+
+      # Finish Test Run Notification
+      - name: Finish Test Run Notification
+        uses: FreEZer00/teams-webhook-action@v1.4.1
+        with:
+          webhook_url: ${{ secrets.DAILY_RUN_WEBHOOK }}
+          title: 'API tests run finished'
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
+          additional_button_title: |-
+            Link to all runs
+            Link to RP
+          additional_button_url: |-
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/daily.yml
+            https://reportportal.epam.com/ui/#polina_panarina_personal_1/launches/all
+
+  uiTests:
+    needs: [build, apiTests]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+
+      # Start Test Run Notification
+      - name: Start Test Run Notification
+        uses: FreEZer00/teams-webhook-action@v1.4.1
+        with:
+          webhook_url: ${{ secrets.DAILY_RUN_WEBHOOK }}
+          title: 'UI tests run started'
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
+          additional_button_title: |-
+            Link to all runs
+          additional_button_url: |-
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/daily.yml
+
+      - name: Run UI tests
+        run: ./gradlew test --tests epam.ui.* -Drp.endpoint=https://reportportal.epam.com -Drp.api.key=$RP_TOKEN -Drp.launch=Daily_Test_Run_UI -Drp.project=polina_panarina_personal_1 -Drp.enable=true
+        env:
+          testUsername: ${{ secrets.TEST_USER_NAME }}
+          testPassword: ${{ secrets.TEST_USER_PASSWORD }}
+          RP_TOKEN: ${{ secrets.RP_TOKEN }}
+
+      - name: Publish Test Results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Reports
+          path: build/reports/tests/
+
+      # Finish Test Run Notification
+      - name: Finish Test Run Notification
+        uses: FreEZer00/teams-webhook-action@v1.4.1
+        with:
+          webhook_url: ${{ secrets.DAILY_RUN_WEBHOOK }}
+          title: 'UI tests run finished'
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
+          additional_button_title: |-
+            Link to all runs
+            Link to RP
+          additional_button_url: |-
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/daily.yml
+            https://reportportal.epam.com/ui/#polina_panarina_personal_1/launches/all
