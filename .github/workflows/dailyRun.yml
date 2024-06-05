@@ -24,7 +24,7 @@ jobs:
       - name: Build notification
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
-          webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.DAILY_RUN_WEBHOOK }}
           title: 'Build is finished'
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
@@ -50,7 +50,7 @@ jobs:
       - name: Start Test Run Notification
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
-          webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.DAILY_RUN_WEBHOOK }}
           title: 'API tests run started'
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
@@ -96,7 +96,7 @@ jobs:
       - name: Finish Test Run Notification
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
-          webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.DAILY_RUN_WEBHOOK }}
           title: 'API tests run finished'
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
@@ -124,7 +124,7 @@ jobs:
       - name: Start Test Run Notification
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
-          webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.DAILY_RUN_WEBHOOK }}
           title: 'UI tests run started'
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
@@ -151,7 +151,7 @@ jobs:
       - name: Finish Test Run Notification
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
-          webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.DAILY_RUN_WEBHOOK }}
           title: 'UI tests run finished'
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
