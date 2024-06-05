@@ -38,7 +38,7 @@ jobs:
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
           webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          title: 'Test run started'
+          title: 'API tests run started'
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           additional_button_title: |-
@@ -87,7 +87,7 @@ jobs:
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
           webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          title: 'Test run finished'
+          title: 'API tests run finished'
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           additional_button_title: |-
