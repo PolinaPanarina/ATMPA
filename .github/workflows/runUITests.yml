@@ -1,19 +1,10 @@
-# This is a basic workflow to help you get started with Actions
+name: Run all UI tests
 
-name: Run all API tests
-
-# Controls when the workflow will run
 on:
-  push:
-    branches: 'main'
-  pull_request:
-    branches: 'main'
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  build:
+  uiBuild:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -38,9 +29,9 @@ jobs:
           additional_button_title: |-
             Link to all runs
           additional_button_url: |-
-            https://github.com/PolinaPanarina/ATMPA/actions/workflows/runApiTests.yml
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/runUITests.yml
 
-  tests:
+  uiTests:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -58,38 +49,19 @@ jobs:
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
           webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          title: 'API tests run started'
+          title: 'UI tests run started'
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           additional_button_title: |-
             Link to all runs
           additional_button_url: |-
-            https://github.com/PolinaPanarina/ATMPA/actions/workflows/runApiTests.yml
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/runUITests.yml
 
-      #   - name: SonarQube Scan
-      #     uses: sonarsource/sonarqube-scan-action@master
-      #     env:
-      #       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      # # Check the Quality Gate status.
-      #   - name: SonarQube Quality Gate check
-      #     id: sonarqube-quality-gate-check
-      #     uses: sonarsource/sonarqube-quality-gate-action@master
-      #   # Force to fail step after specific time.
-      #     timeout-minutes: 5
-      #     env:
-      #      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      # # Optionally you can use the output from the Quality Gate in another step.
-      # # The possible outputs of the `quality-gate-status` variable are `PASSED`, `WARN` or `FAILED`.
-      #   - name: "Example show SonarQube Quality Gate Status value"
-      #     run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
-
-
-      - name: Run API tests
-        run: ./gradlew test --tests epam.api.* -Drp.endpoint=https://reportportal.epam.com -Drp.api.key=$RP_TOKEN -Drp.launch=Run_API_Tests -Drp.project=polina_panarina_personal_1 -Drp.enable=true
+      - name: Run UI tests
+        run: ./gradlew test --tests epam.ui.* -Drp.endpoint=https://reportportal.epam.com -Drp.api.key=$RP_TOKEN -Drp.launch=Run_UI_Tests -Drp.project=polina_panarina_personal_1 -Drp.enable=true
         env:
-          token: ${{ secrets.token }}
+          testUsername: ${{ secrets.TEST_USER_NAME }}
+          testPassword: ${{ secrets.TEST_USER_PASSWORD }}
           RP_TOKEN: ${{ secrets.RP_TOKEN }}
 
       - name: Publish Test Results
@@ -104,12 +76,12 @@ jobs:
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
           webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          title: 'API tests run finished'
+          title: 'UI tests run finished'
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           additional_button_title: |-
             Link to all runs
             Link to RP
           additional_button_url: |-
-            https://github.com/PolinaPanarina/ATMPA/actions/workflows/runApiTests.yml
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/runUITests.yml
             https://reportportal.epam.com/ui/#polina_panarina_personal_1/launches/all
