@@ -33,12 +33,45 @@ jobs:
           java-version: '17'
           distribution: 'zulu'
 
+     # Start Test Run Notification
+      - name: Start Test Run Notification
+        uses: FreEZer00/teams-webhook-action@v1.4.1
+        with:
+          webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          title: '{ "text": "Test run started" }'
+          additional_button_title: |-
+            Link to runs
+          additional_button_url: |-
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/testAPI.yml
+      
       # Build
       - name: Build with Gradle
         run: ./gradlew build --no-daemon
+     
+    #   - name: SonarQube Scan
+    #     uses: sonarsource/sonarqube-scan-action@master
+    #     env:
+    #       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+    # # Check the Quality Gate status.
+    #   - name: SonarQube Quality Gate check
+    #     id: sonarqube-quality-gate-check
+    #     uses: sonarsource/sonarqube-quality-gate-action@master
+    #   # Force to fail step after specific time.
+    #     timeout-minutes: 5
+    #     env:
+    #      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    # # Optionally you can use the output from the Quality Gate in another step.
+    # # The possible outputs of the `quality-gate-status` variable are `PASSED`, `WARN` or `FAILED`.
+    #   - name: "Example show SonarQube Quality Gate Status value"
+    #     run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"  
+
+    
       - name: Run API tests
         run: ./gradlew test --tests epam.api.*
+        env:
+          token: ${{ secrets.token }}
 
       - name: Publish Test Results
         if: always()
@@ -46,3 +79,14 @@ jobs:
         with:
           name: Test Reports
           path: build/reports/tests/
+
+     # Start Test Run Notification
+      - name: Finish Test Run Notification
+        uses: FreEZer00/teams-webhook-action@v1.4.1
+        with:
+          webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          title: '{ "text": "Test run started" }'
+          additional_button_title: |-
+            Link to runs
+          additional_button_url: |-
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/testAPI.yml
