@@ -70,7 +70,7 @@ public class TestListener implements AfterEachCallback, BeforeEachCallback, Befo
             LOGGER.info("screenshot saved to:" + "./screenshots/" + testName + ".png");
             System.out.println("Screenshot taken");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }
