@@ -38,9 +38,11 @@ jobs:
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
           webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          title: '{ "text": "Test run started" }'
+          title: 'Test run started'
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
           additional_button_title: |-
-            Link to runs
+            Link to all runs
           additional_button_url: |-
             https://github.com/PolinaPanarina/ATMPA/actions/workflows/testAPI.yml
       
@@ -85,8 +87,10 @@ jobs:
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
           webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          title: '{ "text": "Test run started" }'
+          title: 'Test run finished'
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
           additional_button_title: |-
-            Link to runs
+            Link to all runs
           additional_button_url: |-
             https://github.com/PolinaPanarina/ATMPA/actions/workflows/testAPI.yml
