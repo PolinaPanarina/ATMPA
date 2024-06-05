@@ -35,10 +35,14 @@ jobs:
 
      # Start Test Run Notification
       - name: Start Test Run Notification
-        uses: marktani/github-actions-webhook@v1
+        uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
-          url: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          data: '{ "text": "Test run started" }'
+          webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          title: '{ "text": "Test run started" }'
+          additional_button_title: |-
+            Link to runs
+          additional_button_url: |-
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/testAPI.yml
       
       # Build
       - name: Build with Gradle
@@ -78,7 +82,11 @@ jobs:
 
      # Start Test Run Notification
       - name: Finish Test Run Notification
-        uses: marktani/github-actions-webhook@v1
+        uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
-          url: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          data: '{ "text": "Test run finished" }'
+          webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          title: '{ "text": "Test run started" }'
+          additional_button_title: |-
+            Link to runs
+          additional_button_url: |-
+            https://github.com/PolinaPanarina/ATMPA/actions/workflows/testAPI.yml
