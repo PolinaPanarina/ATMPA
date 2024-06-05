@@ -91,7 +91,7 @@ jobs:
 
 
       - name: Run API tests
-        run: ./gradlew test --tests epam.api.* -Drp.endpoint=https://reportportal.epam.com -Drp.uuid=${RP_TOKEN} -Drp.launch=Run_API_Tests -Drp.project=polina_panarina_personal_1 -Drp.enable=true
+        run: ./gradlew test --tests epam.api.* -Drp.endpoint=https://reportportal.epam.com -Drp.uuid=$env:RP_TOKEN -Drp.launch=Run_API_Tests -Drp.project=polina_panarina_personal_1 -Drp.enable=true
         env:
           token: ${{ secrets.token }}
 
