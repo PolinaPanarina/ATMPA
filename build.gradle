@@ -38,6 +38,7 @@ configurations {
 }
 dependencies {
     agent "org.aspectj:aspectjweaver:$aspectJVersion"
+   //compileOnly 'org.sonarsource.api.plugin:sonar-plugin-api:10.1.0.809'
     implementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
             "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
             "org.junit.jupiter:junit-jupiter-params:${junitVersion}",
@@ -52,12 +53,16 @@ dependencies {
             "org.testng:testng:$testNGVersion",
             "io.cucumber:cucumber-java:$cucumberVersion",
             "io.cucumber:cucumber-junit:$cucumberVersion",
-            "org.apache.httpcomponents:httpclient:$httpClientVersion"
+            "org.apache.httpcomponents:httpclient:$httpClientVersion",
+            "com.epam.reportportal:agent-java-junit5:5.3.2",
+            "com.epam.reportportal:logger-java-logback:5.2.2"
 }
 
 test {
     useJUnitPlatform()
     systemProperties System.getProperties()
+    testLogging.showStandardStreams = true
+    systemProperty 'junit.jupiter.extensions.autodetection.enabled', true
     ignoreFailures = true
     jvmArgs = ["-javaagent:${configurations.agent.singleFile}"]
     maxParallelForks = 3
