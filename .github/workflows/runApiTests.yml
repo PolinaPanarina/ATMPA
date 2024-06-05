@@ -27,7 +27,7 @@ jobs:
           distribution: 'zulu'
       # Build
       - name: Build with Gradle
-        run: ./gradlew build --no-daemon
+        run: ./gradlew build --exclude-task test
 
       - name: Build notification
         uses: FreEZer00/teams-webhook-action@v1.4.1
@@ -44,6 +44,9 @@ jobs:
   tests:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      RP_TOKEN: ${{ secrets.RP_TOKEN }}
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -67,8 +70,6 @@ jobs:
           additional_button_url: |-
             https://github.com/PolinaPanarina/ATMPA/actions/workflows/testAPI.yml
       
-
-
       #   - name: SonarQube Scan
       #     uses: sonarsource/sonarqube-scan-action@master
       #     env:
@@ -90,7 +91,7 @@ jobs:
 
 
       - name: Run API tests
-        run: ./gradlew test --tests epam.api.*
+        run: ./gradlew test --tests epam.api.* -Drp.endpoint=https://reportportal.epam.com -Drp.uuid=$RP_TOKEN -Drp.launch=Run_API_Tests -Drp.project=polina_panarina_personal_1 -Drp.enable=true
         env:
           token: ${{ secrets.token }}
 
