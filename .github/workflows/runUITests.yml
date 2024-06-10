@@ -58,7 +58,7 @@ jobs:
             https://github.com/PolinaPanarina/ATMPA/actions/workflows/runUITests.yml
 
       - name: Run UI tests
-        run: ./gradlew test --tests epam.ui.* -Drp.endpoint=https://reportportal.epam.com -Drp.api.key=$RP_TOKEN -Drp.launch=Run_UI_Tests -Drp.project=polina_panarina_personal_1 -Drp.enable=true
+        run: ./gradlew test --tests epam.ui.* -Dheadless=true -Drp.endpoint=https://reportportal.epam.com -Drp.api.key=$RP_TOKEN -Drp.launch=Run_UI_Tests -Drp.project=polina_panarina_personal_1 -Drp.enable=true
         env:
           testUsername: ${{ secrets.TEST_USER_NAME }}
           testPassword: ${{ secrets.TEST_USER_PASSWORD }}
