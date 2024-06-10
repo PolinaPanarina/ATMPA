@@ -32,7 +32,7 @@ jobs:
             https://github.com/PolinaPanarina/ATMPA/actions/workflows/runUITests.yml
 
   uiTests:
-    needs: build
+    needs: uiBuild
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
