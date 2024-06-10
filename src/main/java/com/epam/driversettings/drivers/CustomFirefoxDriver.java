@@ -21,8 +21,8 @@ public class CustomFirefoxDriver {
         FirefoxOptions options = new FirefoxOptions();
         options.addArguments("--start-maximized");
         options.addArguments("--disable-notifications");
+        options.addArguments("--headless=new");
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        options.setHeadless(true);
         LOGGER.info(String.format("Setting up Chrome options: %s", options));
         return options;
     }
