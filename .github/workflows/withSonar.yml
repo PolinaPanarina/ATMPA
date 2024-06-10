@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Run all API tests
+name: Run all API tests with sonar
 
 # Controls when the workflow will run
 on:
