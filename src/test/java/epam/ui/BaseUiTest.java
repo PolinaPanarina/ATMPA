@@ -4,7 +4,6 @@ import com.epam.driversettings.WebDriverFactory;
 import com.epam.reportportal.junit5.ReportPortalExtension;
 import com.epam.services.listener.TestListener;
 import com.epam.services.listener.TestNGListener;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
@@ -13,11 +12,6 @@ import org.testng.annotations.Listeners;
 @Listeners(TestNGListener.class)
 @ExtendWith(ReportPortalExtension.class)
 public class BaseUiTest {
-
-    @AfterEach
-    public void tearDown() {
-        WebDriverFactory.quitDriver();
-    }
 
     @AfterMethod
     public void tearDownTestNg() {

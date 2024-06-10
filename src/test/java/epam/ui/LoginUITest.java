@@ -1,7 +1,7 @@
 package epam.ui;
 
 import com.epam.testData.DashboardDataProvider;
-import com.epam.ui.steps.DashboardPageSteps;
+import com.epam.ui.steps.AllDashboardsPageSteps;
 import com.epam.ui.steps.LoginPageSteps;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,18 +16,18 @@ import org.testng.annotations.Test;
 @Execution(ExecutionMode.CONCURRENT)
 public class LoginUITest extends BaseUiTest {
     private LoginPageSteps loginPageSteps;
-    private DashboardPageSteps dashboardPageSteps;
+    private AllDashboardsPageSteps dashboardPageSteps;
 
     @BeforeEach()
     void setUp() {
         loginPageSteps = new LoginPageSteps();
-        dashboardPageSteps = new DashboardPageSteps();
+        dashboardPageSteps = new AllDashboardsPageSteps();
     }
 
     @BeforeMethod()
     void setUpTestNg() {
         loginPageSteps = new LoginPageSteps();
-        dashboardPageSteps = new DashboardPageSteps();
+        dashboardPageSteps = new AllDashboardsPageSteps();
     }
 
     @ParameterizedTest()

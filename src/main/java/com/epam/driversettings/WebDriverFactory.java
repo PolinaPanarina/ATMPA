@@ -1,6 +1,7 @@
 package com.epam.driversettings;
 
 import com.epam.driversettings.drivers.CustomChromeDriver;
+import com.epam.driversettings.drivers.CustomFirefoxDriver;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,17 +9,17 @@ import org.slf4j.LoggerFactory;
 public class WebDriverFactory {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public static final String CHROME = "chrome";
+    public static final String FIREFOX = "firefox";
 
     public static final Logger LOGGER = LoggerFactory.getLogger(WebDriverFactory.class);
 
     private static WebDriver initializeDriver(String browserType) {
         LOGGER.info("initializeDriver");
-        switch (browserType.toLowerCase()) {
-            case CHROME:
-                return new CustomChromeDriver().getDriver();
-            default:
-                throw new IllegalArgumentException("Unsupported browser provided: " + browserType);
-        }
+        return switch (browserType) {
+            case CHROME -> new CustomChromeDriver().getDriver();
+            case FIREFOX -> new CustomFirefoxDriver().getDriver();
+            default -> throw new IllegalArgumentException("Unsupported browser provided: " + browserType);
+        };
 
     }
 
