@@ -21,6 +21,7 @@ public class CustomChromeDriver {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         options.addArguments("--disable-notifications");
+        options.addArguments("--headless");
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         LOGGER.info(String.format("Setting up Chrome options: %s", options));
         return options;
